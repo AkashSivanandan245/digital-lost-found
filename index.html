@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Digital Lost & Found</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body onload="checkLogin()">
+
+<div class="overlay">
+
+<header>
+  <div class="title-box">
+    <h1>Digital Lost & Found System</h1>
+    <p>Helping People Reconnect With Their Belongings</p>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- LOST ITEM BLOCK -->
+<div class="card lost-card">
+<h2>Report Lost Item</h2>
+
+<form onsubmit="addLost(event)">
+<input type="text" id="lostName" placeholder="Item Name" required>
+<input type="text" id="lostLocation" placeholder="Last Seen Location">
+<input type="date" id="lostDate">
+<textarea id="lostDesc" placeholder="Item Description"></textarea>
+<input type="text" id="lostContact" placeholder="Your Contact Number">
+<button type="submit">Submit Lost Report</button>
+</form>
+</div>
+
+<!-- FOUND ITEM BLOCK -->
+<div class="card found-card">
+<h2>Report Found Item</h2>
+
+<form onsubmit="addFound(event)">
+<input type="text" id="foundName" placeholder="Item Name" required>
+<input type="text" id="foundLocation" placeholder="Found Location">
+<input type="date" id="foundDate">
+<textarea id="foundDesc" placeholder="Item Description"></textarea>
+<input type="text" id="foundContact" placeholder="Your Contact Number">
+<button type="submit">Submit Found Report</button>
+</form>
+</div>
+
+</div>
+
+<!-- REPORTS SECTION -->
+<div class="reports-section">
+
+<h2 class="report-title">Submitted Reports</h2>
+
+<input type="text" id="searchBox" placeholder="Search by item, location, lost/found..." onkeyup="displayReports()" class="search-input">
+
+<div id="reportList"></div>
+
+</div>
+
+</div>
+
+<script>
+
+// LOGIN CHECK
+function checkLogin(){
+let user = localStorage.getItem("loggedUser");
+if(!user){
+window.location.href="login.html";
+}
+}
+
+// LOGOUT
+function logout(){
+localStorage.removeItem("loggedUser");
+window.location.href="login.html";
+}
+
+// LOAD ITEMS
+let items = JSON.parse(localStorage.getItem("items")) || [];
+
+// ADD LOST
+function addLost(e){
+e.preventDefault();
+
+let item = {
+type:"Lost",
+name:lostName.value,
+location:lostLocation.value,
+date:lostDate.value,
+desc:lostDesc.value,
+contact:lostContact.value
+};
+
+items.push(item);
+localStorage.setItem("items",JSON.stringify(items));
+
+alert("Lost Item Submitted Successfully");
+
+displayReports();
+e.target.reset();
+}
+
+// ADD FOUND
+function addFound(e){
+e.preventDefault();
+
+let item = {
+type:"Found",
+name:foundName.value,
+location:foundLocation.value,
+date:foundDate.value,
+desc:foundDesc.value,
+contact:foundContact.value
+};
+
+items.push(item);
+localStorage.setItem("items",JSON.stringify(items));
+
+alert("Found Item Submitted Successfully");
+
+displayReports();
+e.target.reset();
+}
+
+// DISPLAY + SEARCH
+function displayReports(){
+
+let box = document.getElementById("reportList");
+let search = searchBox.value.toLowerCase();
+
+box.innerHTML="";
+
+items.filter(item =>
+item.name.toLowerCase().includes(search) ||
+item.location.toLowerCase().includes(search) ||
+item.type.toLowerCase().includes(search) ||
+item.desc.toLowerCase().includes(search)
+)
+.forEach(item=>{
+
+box.innerHTML+=`
+<div class="report-card">
+
+<div class="report-header">
+<span class="badge ${item.type.toLowerCase()}">${item.type}</span>
+<h3>${item.name}</h3>
+</div>
+
+<div class="report-body">
+<p><b>📍 Location:</b> ${item.location}</p>
+<p><b>📅 Date:</b> ${item.date}</p>
+<p><b>📝 Description:</b> ${item.desc}</p>
+<p><b>📞 Contact:</b> ${item.contact}</p>
+</div>
+
+</div>
+`;
+
+});
+}
+
+displayReports();
+
+</script>
+
+</body>
+</html>

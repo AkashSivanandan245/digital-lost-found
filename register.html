@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Register</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="overlay">
+
+<div class="card" style="margin:100px auto;">
+<h2>Create Account</h2>
+
+<input type="text" id="name" placeholder="Full Name">
+<input type="email" id="email" placeholder="Email">
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="register()">Register</button>
+
+<p class="auth-link">
+Already Registered?
+<a href="login.html">Login</a>
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+function register(){
+
+let name=document.getElementById("name").value;
+let email=document.getElementById("email").value;
+let password=document.getElementById("password").value;
+
+if(name==""||email==""||password==""){
+alert("All fields required");
+return;
+}
+
+let users=JSON.parse(localStorage.getItem("users")) || [];
+
+let exist=users.find(u=>u.email===email);
+
+if(exist){
+alert("User already exists");
+return;
+}
+
+users.push({name,email,password});
+localStorage.setItem("users",JSON.stringify(users));
+
+alert("Registration Successful");
+window.location.href="login.html";
+
+}
+
+</script>
+
+</body>
+</html>

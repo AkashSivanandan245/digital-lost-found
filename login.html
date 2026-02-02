@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<script>
+// If no users exist → redirect to register
+let users = JSON.parse(localStorage.getItem("users")) || [];
+if(users.length === 0){
+  window.location.href="register.html";
+}
+</script>
+
+<div class="overlay">
+
+<div class="card" style="margin:100px auto;">
+<h2>User Login</h2>
+
+<input type="email" id="email" placeholder="Email">
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+<p class="auth-link">
+New User?
+<a href="register.html">Create Account</a>
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+function login(){
+
+let email=document.getElementById("email").value;
+let password=document.getElementById("password").value;
+
+let users=JSON.parse(localStorage.getItem("users")) || [];
+
+let validUser=users.find(u=>u.email===email && u.password===password);
+
+if(validUser){
+
+localStorage.setItem("loggedUser",JSON.stringify(validUser));
+alert("Login Successful");
+window.location.href="index.html";
+
+}else{
+alert("Invalid Credentials");
+}
+
+}
+
+</script>
+
+</body>
+</html>
+
