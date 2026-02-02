@@ -8,16 +8,14 @@
 <body>
 
 <script>
-// If no users exist → redirect to register
 let users = JSON.parse(localStorage.getItem("users")) || [];
 if(users.length === 0){
-  window.location.href="register.html";
+window.location.href="register.html";
 }
 </script>
 
-<div class="overlay">
+<div class="card auth-card">
 
-<div class="card" style="margin:100px auto;">
 <h2>User Login</h2>
 
 <input type="email" id="email" placeholder="Email">
@@ -25,12 +23,14 @@ if(users.length === 0){
 
 <button onclick="login()">Login</button>
 
+<br>
+
 <p class="auth-link">
 New User?
 <a href="register.html">Create Account</a>
 </p>
 
-</div>
+<div id="loginMsg" class="message-box"></div>
 
 </div>
 
@@ -38,21 +38,31 @@ New User?
 
 function login(){
 
-let email=document.getElementById("email").value;
-let password=document.getElementById("password").value;
+let email=email.value;
+let password=password.value;
 
 let users=JSON.parse(localStorage.getItem("users")) || [];
 
 let validUser=users.find(u=>u.email===email && u.password===password);
 
+let msg=document.getElementById("loginMsg");
+
 if(validUser){
 
+msg.innerText="Login Successful!";
+msg.className="message-box show success";
+
 localStorage.setItem("loggedUser",JSON.stringify(validUser));
-alert("Login Successful");
+
+setTimeout(()=>{
 window.location.href="index.html";
+},1200);
 
 }else{
-alert("Invalid Credentials");
+
+msg.innerText="Invalid Email or Password!";
+msg.className="message-box show error";
+
 }
 
 }
@@ -61,4 +71,5 @@ alert("Invalid Credentials");
 
 </body>
 </html>
+
 

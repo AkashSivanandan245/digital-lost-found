@@ -17,7 +17,7 @@ padding:30px;
 }
 
 .title-box{
-background:rgba(255,255,255,0.85);
+background:rgba(255,255,255,0.9);
 border-radius:16px;
 padding:25px 50px;
 box-shadow:0 8px 30px rgba(0,0,0,0.3);
@@ -26,17 +26,15 @@ display:inline-block;
 
 .title-box h1{
 color:#2c3e50;
-font-size:36px;
 margin:0;
 }
 
 .title-box p{
 color:#555;
-margin-top:10px;
 }
 
 .logout-btn{
-margin-top:15px;
+margin-top:10px;
 padding:8px 20px;
 border:none;
 border-radius:20px;
@@ -45,7 +43,7 @@ color:white;
 cursor:pointer;
 }
 
-/* FORM AREA */
+/* FORM LAYOUT */
 
 .container{
 display:flex;
@@ -55,14 +53,16 @@ flex-wrap:wrap;
 padding:20px;
 }
 
-/* FORM CARDS */
-
 .card{
-background:rgba(255,255,255,0.85);
+background:rgba(255,255,255,0.9);
 border-radius:18px;
 padding:25px;
 width:350px;
 box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+.auth-card{
+margin:100px auto;
 }
 
 .lost-card h2{color:#ff7675;}
@@ -74,7 +74,6 @@ padding:10px;
 margin-top:10px;
 border-radius:6px;
 border:1px solid #ccc;
-outline:none;
 }
 
 button{
@@ -88,7 +87,7 @@ color:white;
 cursor:pointer;
 }
 
-/* REPORT SECTION */
+/* REPORTS */
 
 .reports-section{
 padding:20px;
@@ -99,8 +98,6 @@ text-align:center;
 color:white;
 }
 
-/* SEARCH */
-
 .search-input{
 width:300px;
 padding:10px;
@@ -110,18 +107,14 @@ margin:15px auto;
 display:block;
 }
 
-/* REPORT GRID */
-
 #reportList{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
 gap:20px;
 }
 
-/* REPORT CARD */
-
 .report-card{
-background:rgba(255,255,255,0.9);
+background:white;
 border-radius:15px;
 padding:18px;
 box-shadow:0 8px 20px rgba(0,0,0,0.3);
@@ -132,8 +125,6 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 }
-
-/* BADGES */
 
 .badge{
 padding:5px 12px;
@@ -146,44 +137,48 @@ color:white;
 .badge.lost{background:#e74c3c;}
 .badge.found{background:#2ecc71;}
 
-/* MESSAGE BOX */
+/* AUTH LINKS FIX */
+
+.auth-link{
+text-align:center;
+margin-top:15px;
+position:relative;
+z-index:10;
+}
+
+.auth-link a{
+color:#007bff;
+font-weight:bold;
+text-decoration:none;
+cursor:pointer;
+}
+
+.auth-link a:hover{
+text-decoration:underline;
+}
+
+/* MESSAGE SYSTEM */
 
 .message-box{
 opacity:0;
-padding:12px;
-border-radius:10px;
+padding:10px;
+border-radius:8px;
+margin-top:10px;
 text-align:center;
-position:fixed;
-bottom:20px;
-right:20px;
 transition:0.4s;
 }
 
-.message-box.show{
-opacity:1;
-}
+.message-box.show{opacity:1;}
 
-.message-box.success{
-background:#2ecc71;
-color:white;
-}
-
-.message-box.error{
-background:#e74c3c;
-color:white;
-}
-
-/* MOBILE */
+.message-box.success{background:#2ecc71;color:white;}
+.message-box.error{background:#e74c3c;color:white;}
 
 @media(max-width:800px){
-
 .container{
 flex-direction:column;
 align-items:center;
 }
-
 .search-input{
 width:90%;
 }
-
 }

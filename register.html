@@ -7,9 +7,8 @@
 
 <body>
 
-<div class="overlay">
+<div class="card auth-card">
 
-<div class="card" style="margin:100px auto;">
 <h2>Create Account</h2>
 
 <input type="text" id="name" placeholder="Full Name">
@@ -18,12 +17,14 @@
 
 <button onclick="register()">Register</button>
 
+<br>
+
 <p class="auth-link">
 Already Registered?
 <a href="login.html">Login</a>
 </p>
 
-</div>
+<div id="regMsg" class="message-box"></div>
 
 </div>
 
@@ -35,8 +36,11 @@ let name=document.getElementById("name").value;
 let email=document.getElementById("email").value;
 let password=document.getElementById("password").value;
 
+let msg=document.getElementById("regMsg");
+
 if(name==""||email==""||password==""){
-alert("All fields required");
+msg.innerText="All fields required!";
+msg.className="message-box show error";
 return;
 }
 
@@ -45,15 +49,20 @@ let users=JSON.parse(localStorage.getItem("users")) || [];
 let exist=users.find(u=>u.email===email);
 
 if(exist){
-alert("User already exists");
+msg.innerText="User already exists!";
+msg.className="message-box show error";
 return;
 }
 
 users.push({name,email,password});
 localStorage.setItem("users",JSON.stringify(users));
 
-alert("Registration Successful");
+msg.innerText="Registration Successful!";
+msg.className="message-box show success";
+
+setTimeout(()=>{
 window.location.href="login.html";
+},1200);
 
 }
 
@@ -61,3 +70,4 @@ window.location.href="login.html";
 
 </body>
 </html>
+
