@@ -8,8 +8,6 @@
 
 <body onload="checkLogin()">
 
-<div class="overlay">
-
 <header>
   <div class="title-box">
     <h1>Digital Lost & Found System</h1>
@@ -61,7 +59,8 @@
 
 </div>
 
-</div>
+<!-- MESSAGE BOX -->
+<div id="msgBox" class="message-box"></div>
 
 <script>
 
@@ -79,6 +78,18 @@ localStorage.removeItem("loggedUser");
 window.location.href="login.html";
 }
 
+// MESSAGE SYSTEM
+function showMessage(text,type="success"){
+
+let box=document.getElementById("msgBox");
+box.innerText=text;
+box.className="message-box show "+type;
+
+setTimeout(()=>{
+box.className="message-box";
+},3000);
+}
+
 // LOAD ITEMS
 let items = JSON.parse(localStorage.getItem("items")) || [];
 
@@ -86,7 +97,7 @@ let items = JSON.parse(localStorage.getItem("items")) || [];
 function addLost(e){
 e.preventDefault();
 
-let item = {
+let item={
 type:"Lost",
 name:lostName.value,
 location:lostLocation.value,
@@ -98,7 +109,7 @@ contact:lostContact.value
 items.push(item);
 localStorage.setItem("items",JSON.stringify(items));
 
-alert("Lost Item Submitted Successfully");
+showMessage("Lost Item Submitted Successfully","success");
 
 displayReports();
 e.target.reset();
@@ -108,7 +119,7 @@ e.target.reset();
 function addFound(e){
 e.preventDefault();
 
-let item = {
+let item={
 type:"Found",
 name:foundName.value,
 location:foundLocation.value,
@@ -120,7 +131,7 @@ contact:foundContact.value
 items.push(item);
 localStorage.setItem("items",JSON.stringify(items));
 
-alert("Found Item Submitted Successfully");
+showMessage("Found Item Submitted Successfully","success");
 
 displayReports();
 e.target.reset();
@@ -129,8 +140,8 @@ e.target.reset();
 // DISPLAY + SEARCH
 function displayReports(){
 
-let box = document.getElementById("reportList");
-let search = searchBox.value.toLowerCase();
+let box=document.getElementById("reportList");
+let search=searchBox.value.toLowerCase();
 
 box.innerHTML="";
 
