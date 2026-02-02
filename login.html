@@ -7,13 +7,6 @@
 
 <body>
 
-<script>
-let users = JSON.parse(localStorage.getItem("users")) || [];
-if(users.length === 0){
-window.location.href="register.html";
-}
-</script>
-
 <div class="card auth-card">
 
 <h2>User Login</h2>
@@ -34,36 +27,47 @@ New User?
 
 </div>
 
-<script>
+<!-- Firebase SDK -->
+<script type="module">
 
-function login(){
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
 
-let email=email.value;
-let password=password.value;
+const firebaseConfig = {
+ apiKey: "AIzaSyA4Oew3QeYdju6YkphVQFAhfSHUom4Mka8",
+ authDomain: "digital-lost-found.firebaseapp.com",
+ projectId: "digital-lost-found",
+ storageBucket: "digital-lost-found.firebasestorage.app",
+ messagingSenderId: "232236131696",
+ appId: "1:232236131696:web:ee80a442378d1551d15bb5"
+};
 
-let users=JSON.parse(localStorage.getItem("users")) || [];
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-let validUser=users.find(u=>u.email===email && u.password===password);
+window.login = function(){
 
-let msg=document.getElementById("loginMsg");
+let email = document.getElementById("email").value;
+let password = document.getElementById("password").value;
+let msg = document.getElementById("loginMsg");
 
-if(validUser){
+signInWithEmailAndPassword(auth, email, password)
+.then(() => {
 
-msg.innerText="Login Successful!";
-msg.className="message-box show success";
-
-localStorage.setItem("loggedUser",JSON.stringify(validUser));
+msg.innerText = "Login Successful!";
+msg.className = "message-box show success";
 
 setTimeout(()=>{
 window.location.href="index.html";
 },1200);
 
-}else{
+})
+.catch(error => {
 
-msg.innerText="Invalid Email or Password!";
-msg.className="message-box show error";
+msg.innerText = error.message;
+msg.className = "message-box show error";
 
-}
+});
 
 }
 
