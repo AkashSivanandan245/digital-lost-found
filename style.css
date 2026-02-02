@@ -24,15 +24,6 @@ box-shadow:0 8px 30px rgba(0,0,0,0.3);
 display:inline-block;
 }
 
-.title-box h1{
-color:#2c3e50;
-margin:0;
-}
-
-.title-box p{
-color:#555;
-}
-
 .logout-btn{
 margin-top:10px;
 padding:8px 20px;
@@ -43,7 +34,7 @@ color:white;
 cursor:pointer;
 }
 
-/* FORM LAYOUT */
+/* CARDS */
 
 .container{
 display:flex;
@@ -93,71 +84,32 @@ cursor:pointer;
 padding:20px;
 }
 
-.report-title{
-text-align:center;
-color:white;
-}
-
-.search-input{
-width:300px;
-padding:10px;
-border-radius:20px;
-border:none;
-margin:15px auto;
-display:block;
-}
-
-#reportList{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:20px;
-}
-
 .report-card{
 background:white;
 border-radius:15px;
 padding:18px;
+margin-bottom:15px;
 box-shadow:0 8px 20px rgba(0,0,0,0.3);
 }
 
-.report-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.badge{
-padding:5px 12px;
-border-radius:20px;
-font-size:12px;
-font-weight:bold;
-color:white;
-}
-
-.badge.lost{background:#e74c3c;}
-.badge.found{background:#2ecc71;}
-
-/* AUTH LINKS FIX */
+/* AUTH LINKS */
 
 .auth-link{
 text-align:center;
 margin-top:15px;
-position:relative;
-z-index:10;
 }
 
 .auth-link a{
 color:#007bff;
 font-weight:bold;
 text-decoration:none;
-cursor:pointer;
 }
 
 .auth-link a:hover{
 text-decoration:underline;
 }
 
-/* MESSAGE SYSTEM */
+/* MESSAGE */
 
 .message-box{
 opacity:0;
@@ -169,7 +121,6 @@ transition:0.4s;
 }
 
 .message-box.show{opacity:1;}
-
 .message-box.success{background:#2ecc71;color:white;}
 .message-box.error{background:#e74c3c;color:white;}
 
@@ -178,7 +129,5 @@ transition:0.4s;
 flex-direction:column;
 align-items:center;
 }
-.search-input{
-width:90%;
 }
-}
+
