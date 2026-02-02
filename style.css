@@ -34,7 +34,7 @@ color:white;
 cursor:pointer;
 }
 
-/* CARDS */
+/* MAIN CARDS */
 
 .container{
 display:flex;
@@ -78,18 +78,81 @@ color:white;
 cursor:pointer;
 }
 
-/* REPORTS */
+/* REPORT SECTION */
 
 .reports-section{
 padding:20px;
+text-align:center;
 }
 
-.report-card{
+/* TITLE BOX */
+
+.report-title-box{
+background:rgba(255,255,255,0.9);
+padding:12px 30px;
+border-radius:30px;
+display:inline-block;
+margin-bottom:20px;
+font-size:22px;
+font-weight:bold;
+box-shadow:0 6px 15px rgba(0,0,0,0.3);
+}
+
+/* GRID */
+
+.report-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+/* MINI CARD */
+
+.report-card-mini{
 background:white;
-border-radius:15px;
-padding:18px;
-margin-bottom:15px;
-box-shadow:0 8px 20px rgba(0,0,0,0.3);
+border-radius:14px;
+padding:15px;
+box-shadow:0 8px 18px rgba(0,0,0,0.3);
+position:relative;
+transition:0.3s;
+}
+
+.report-card-mini:hover{
+transform:translateY(-5px);
+}
+
+/* BADGES */
+
+.badge{
+padding:5px 12px;
+border-radius:20px;
+font-size:11px;
+font-weight:bold;
+color:white;
+position:absolute;
+top:12px;
+right:12px;
+}
+
+.badge.lost{background:#e74c3c;}
+.badge.found{background:#2ecc71;}
+
+/* TEXT */
+
+.report-card-mini h3{
+margin-top:20px;
+margin-bottom:5px;
+font-size:18px;
+}
+
+.report-card-mini p{
+margin:3px 0;
+font-size:14px;
+}
+
+.desc-text{
+color:#555;
+font-size:13px;
 }
 
 /* AUTH LINKS */
@@ -130,4 +193,3 @@ flex-direction:column;
 align-items:center;
 }
 }
-
